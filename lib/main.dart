@@ -21,14 +21,25 @@ class _MyAppState extends State<MyApp> {
   double _kelvin = 0;
   double _reamur = 0;
 
-  //fungsi
+  //mengeset nilai pada dropdown
+  String _newValue = "Kelvin";
+  double _result = 0;
+
+  //Fungsi perhitungan suhu perlu untuk diubah sehingga hanya memproses konversi sesuai
+  //dengan pilihan pengguna.
   void _konversiSuhu() {
     setState(() {
       _inputUser = double.parse(etInput.text);
-      _kelvin = _inputUser + 273;
-      _reamur = _inputUser * (4 / 5);
+      if (_newValue == "Kelvin")
+        _result = _inputUser + 273;
+      else
+        _result = (4 / 5) * _inputUser;
     });
   }
+
+
+  //buat list
+  var listItem = {"Kelvin", "Reamur"};
 
   @override
   Widget build(BuildContext context) {
@@ -49,19 +60,22 @@ class _MyAppState extends State<MyApp> {
               children: [
                 Input(etInput: etInput),
                 //memperluas anak row
-                DropdownButton(
-                  items: [
-                    DropdownMenuItem(
-                        value: "Kelvin",
-                        child: Container(child: Text("Kelvin"))),
-                    DropdownMenuItem(
-                        value: "Reamur",
-                        child: Container(child: Text("Reamur"))),
-                  ],
-                  value: null,
-                  onChanged: (String changeValue) {},
+                DropdownButton<String>(
+                  items: listItem.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  // isi value dengan variabel _newValue.
+                  value: _newValue,
+                  onChanged: (String changeValue) {
+                    setState(() {
+                      _newValue = changeValue;
+                    });
+                  },
                 ),
-                Result(kelvin: _kelvin, reamur: _reamur),
+                Result(result: _result,),
                 Convert(konvertHandler: _konversiSuhu),
               ],
             ),
