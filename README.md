@@ -17,10 +17,37 @@ samples, guidance on mobile development, and a full API reference.
 
 # 
 
-<li><b><br>Nama  : Riris Silvia Zahri
-<li><b><br>Kelas : MI 2A
-<li><b><br>NIM   : 1931710085
+<li><b>Nama  : Riris Silvia Zahri
+<li><b>Kelas : MI 2A
+<li><b>NIM   : 1931710085
 
 # Hasil Praktikum 1
+
+## Halaman utama
+![plot](./image/2.png)
+<br>
+
+
+## Kelvin
+![plot](./image/4.png)
+<br>
+
+## Reamur
+![plot](./image/3.png)
+<br>
+
+# Hasil Praktikum 2
+
+![plot](./image/5.png)
+<br>
+
+![plot](./image/6.png)
+<br>
+
+![plot](./image/7.png)
+<br>
+
+![plot](./image/8.png)
+<br>
 
 
