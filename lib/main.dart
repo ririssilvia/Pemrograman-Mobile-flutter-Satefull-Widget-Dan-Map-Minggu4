@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'Input.dart';
 import 'Result.dart';
 import 'Convert.dart';
+import 'RiwayatKonversi.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,12 +35,17 @@ class _MyAppState extends State<MyApp> {
         _result = _inputUser + 273;
       else
         _result = (4 / 5) * _inputUser;
+        //untuk menampilkan hasil riwayat
+        listViewItem.add("$_newValue : $_result");
     });
   }
 
-
   //buat list
   var listItem = {"Kelvin", "Reamur"};
+
+  //variable bertipe List<String> (praktikum 2)
+  // ignore: deprecated_member_use
+  List<String> listViewItem = List<String>();
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +81,25 @@ class _MyAppState extends State<MyApp> {
                     });
                   },
                 ),
-                Result(result: _result,),
+                Result(
+                  result: _result,
+                ),
                 Convert(konvertHandler: _konversiSuhu),
+                //Riwayat Konversi
+                Container(
+                  margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                  child: Text(
+                    "Riwayat Konversi",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                ),
+                Expanded(
+                    child: RiwayatKonversi(listViewItem: listViewItem)),
               ],
             ),
           ),
         ));
   }
 }
+
+

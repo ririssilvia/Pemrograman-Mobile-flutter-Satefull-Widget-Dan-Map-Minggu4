@@ -24,6 +24,5 @@ class Result extends StatelessWidget {
         ],
       ),
     );
-// );
   }
 }
