@@ -66,21 +66,7 @@ class _MyAppState extends State<MyApp> {
               children: [
                 Input(etInput: etInput),
                 //memperluas anak row
-                DropdownButton<String>(
-                  items: listItem.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  // isi value dengan variabel _newValue.
-                  value: _newValue,
-                  onChanged: (String changeValue) {
-                    setState(() {
-                      _newValue = changeValue;
-                    });
-                  },
-                ),
+                buildDropdownButton(),
                 Result(
                   result: _result,
                 ),
@@ -99,6 +85,24 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ));
+  }
+
+  DropdownButton<String> buildDropdownButton() {
+    return DropdownButton<String>(
+                items: listItem.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                // isi value dengan variabel _newValue.
+                value: _newValue,
+                onChanged: (String changeValue) {
+                  setState(() {
+                    _newValue = changeValue;
+                  });
+                },
+              );
   }
 }
 
