@@ -3,7 +3,7 @@ import 'Input.dart';
 import 'Result.dart';
 import 'Convert.dart';
 import 'RiwayatKonversi.dart';
-import 'Dropdown.dart';
+import 'DropdownKonversi.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
   double _result = 0;
 
   //buat list
-  var listItem = {"Kelvin", "Reamur", "Farenheit"};
+  var listItem = ["Kelvin", "Reamur"];
 
   //variable bertipe List<String> (praktikum 2)
   // ignore: deprecated_member_use
@@ -41,15 +41,14 @@ class _MyAppState extends State<MyApp> {
       _inputUser = double.parse(etInput.text);
       if (_newValue == "Kelvin")
         _result = _inputUser + 273;
-      else if (_newValue == "Reamur")
-        _result = (4 / 5) * _inputUser;
       else
-        _result = (_inputUser * (9 / 5)) + 32;
+        _result = (4 / 5) * _inputUser;
       //untuk menampilkan hasil riwayat
       listViewItem.add("$_newValue : $_result");
     });
   }
 
+//method dropdownOnChanged pada parameter value untuk mengubah pilihan pada dropdown.
   void dropdownOnChanged(String changeValue) {
     setState(() {
       _newValue = changeValue;

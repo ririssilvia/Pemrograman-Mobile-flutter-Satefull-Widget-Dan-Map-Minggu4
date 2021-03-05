@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 class DropdownKonversi extends StatelessWidget {
-  const DropdownKonversi ({
+  const DropdownKonversi({
     Key key,
     @required this.listItem,
     @required String newValue,
-    @required this.dropdownOnChanged,
-     
-      }) : _newValue = newValue, super(key: key);
+    @required this.dropdownOnChanged, 
+  }) : _newValue = newValue, super(key: key);
 
-  final Set<String> listItem;
+  final List<String> listItem;
   final String _newValue;
   final Function dropdownOnChanged;
 
@@ -24,7 +23,6 @@ class DropdownKonversi extends StatelessWidget {
       }).toList(),
       value: _newValue,
       onChanged: (String changeValue) {
-        // ignore: unused_label
         dropdownOnChanged : dropdownOnChanged(changeValue);
       },
     );
