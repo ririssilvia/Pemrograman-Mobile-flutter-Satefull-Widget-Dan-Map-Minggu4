@@ -3,6 +3,7 @@ import 'Input.dart';
 import 'Result.dart';
 import 'Convert.dart';
 import 'RiwayatKonversi.dart';
+import 'Dropdown.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,8 +24,15 @@ class _MyAppState extends State<MyApp> {
   double _reamur = 0;
 
   //mengeset nilai pada dropdown
-  String _newValue = "Kelvin";
+  String _newValue = "Reamur";
   double _result = 0;
+
+  //buat list
+  var listItem = {"Kelvin", "Reamur", "Farenheit"};
+
+  //variable bertipe List<String> (praktikum 2)
+  // ignore: deprecated_member_use
+  List<String> listViewItem = List<String>();
 
   //Fungsi perhitungan suhu perlu untuk diubah sehingga hanya memproses konversi sesuai
   //dengan pilihan pengguna.
@@ -33,19 +41,21 @@ class _MyAppState extends State<MyApp> {
       _inputUser = double.parse(etInput.text);
       if (_newValue == "Kelvin")
         _result = _inputUser + 273;
-      else
+      else if (_newValue == "Reamur")
         _result = (4 / 5) * _inputUser;
-        //untuk menampilkan hasil riwayat
-        listViewItem.add("$_newValue : $_result");
+      else
+        _result = (_inputUser * (9 / 5)) + 32;
+      //untuk menampilkan hasil riwayat
+      listViewItem.add("$_newValue : $_result");
     });
   }
 
-  //buat list
-  var listItem = {"Kelvin", "Reamur"};
-
-  //variable bertipe List<String> (praktikum 2)
-  // ignore: deprecated_member_use
-  List<String> listViewItem = List<String>();
+  void dropdownOnChanged(String changeValue) {
+    setState(() {
+      _newValue = changeValue;
+      _konversiSuhu();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +76,10 @@ class _MyAppState extends State<MyApp> {
               children: [
                 Input(etInput: etInput),
                 //memperluas anak row
-                buildDropdownButton(),
+                DropdownKonversi(
+                    listItem: listItem,
+                    newValue: _newValue,
+                    dropdownOnChanged: dropdownOnChanged),
                 Result(
                   result: _result,
                 ),
@@ -79,30 +92,10 @@ class _MyAppState extends State<MyApp> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ),
-                Expanded(
-                    child: RiwayatKonversi(listViewItem: listViewItem)),
+                Expanded(child: RiwayatKonversi(listViewItem: listViewItem)),
               ],
             ),
           ),
         ));
   }
-
-  DropdownButton<String> buildDropdownButton() {
-    return DropdownButton<String>(
-                items: listItem.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                // isi value dengan variabel _newValue.
-                value: _newValue,
-                onChanged: (String changeValue) {
-                  setState(() {
-                    _newValue = changeValue;
-                  });
-                },
-              );
-  }
 }
-
